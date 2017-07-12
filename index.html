@@ -13,7 +13,7 @@
                var ajax = new XMLHttpRequest();  //crear la instancia
                ajax.open("GET", url);  //abrir la conexion
                ajax.send();  // se envia
-               ajax.onreadystatechange = function() {
+               ajax.onreadystatechange = function() { //contiene el manejador del evento que es invocado cuando se dispara el evento
                    if (ajax.readyState == 4) {
                        resolve(JSON.parse(ajax.responseText));
                    };
@@ -22,7 +22,7 @@
        };
 
        getJSON("data/earth-like-results.json")
-       .then(function(mensaje){        
+       .then(function(mensaje){
          console.log(mensaje)
          return(getJSON(mensaje.results[0]))
        })
