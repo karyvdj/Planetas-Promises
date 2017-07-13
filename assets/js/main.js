@@ -42,11 +42,12 @@
 var plantillaPlanetas = '<div class="row">'+
   '<div class="col s12 m9 offset-m1">'+
     '<div class="card horizontal">'+
-      '<img src="https://dummyimage.com/250x250/000/fff">'+
+      '<img src="static/img/planetas.jpg">'+
       '<div class="card-content">'+
         '<h4>__planeta__</h4>'+
         '<p>Orbita: <b>__orbita__</b></p>'+
-        '<p>Descubierto en <b>__fecha__</b>con <b>__telescopio__</b></p>'+
+        '<p>Descubierto en <b>__fecha__</b></p>'+
+        '<p>Con <b>__telescopio__</b></p>'+
       '</div>'+
     '</div>'+
   '</div>'+
