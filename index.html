@@ -3,32 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Planetas</title>
+    <link rel="stylesheet" href="static/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="static/css/main.css">
   </head>
   <body>
-    <h1>Planetas</h1>
+    <nav class="nav-extended  blue darken-4">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">Explora los Planetas</a>
+      </div>
+      <p class="center">Lee más acerca de los planetas y otra estrellas!</p>
+    </nav>
 
-    <script>
-       function getJSON(url) {
-           return new Promise(function(resolve, reject) {  //retorna promise para poder agregar then o catch
-               var ajax = new XMLHttpRequest();  //crear la instancia
-               ajax.open("GET", url);  //abrir la conexion
-               ajax.send();  // se envia
-               ajax.onreadystatechange = function() { //contiene el manejador del evento que es invocado cuando se dispara el evento
-                   if (ajax.readyState == 4) {
-                       resolve(JSON.parse(ajax.responseText));
-                   };
-               };
-           });
-       };
+    <section id="contendorPlanetas" class="container">
 
-       getJSON("data/earth-like-results.json")
-       .then(function(mensaje){
-         console.log(mensaje)
-         return(getJSON(mensaje.results[0]))
-       })
-       .then(function(resultado){
-         console.log(resultado)
-       })
-   </script>
+    </section>
+
+   <script src="static/jquery/dist/jquery.min.js"> </script>
+   <script src="static/materialize-css/dist/js/materialize.min.js"> </script>
+   <script src="static/js/main.js"></script>
   </body>
 </html>
