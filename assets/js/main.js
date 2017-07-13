@@ -12,14 +12,32 @@
  };
 
  getJSON("data/earth-like-results.json") //obtener un JSON
- .then(function(mensaje){  //obtener el resultado de uno en particular
-   console.log(mensaje)
-   return(getJSON(mensaje.results[0]))
- })
- .then(function(resultado){ //se mete en una funcion para que la asincronía no se rompa
-   console.log(resultado)
-   mostrarPlaneta(resultado);
- })
+
+.then(function(respuesta) {
+  var arregloPlanetas = (respuesta.results.map(function(url){
+    return getJSON(url);
+    console.log(arregloPlanetas);
+  }));
+  return Promise.all(arregloPlanetas);
+})
+
+.then(function(planetas){
+  // console.log(planetas)
+  planetas.forEach(function (planeta) {
+    var contenedorPlanetas = document.getElementById('contendorPlanetas')
+    var nombre = planeta.pl_name;
+    var orbita = planeta.pl_orbper;
+    var fecha = planeta.pl_disc;
+    var telescopio = planeta.pl_telescope;
+
+    var plantillaFinal = plantillaPlanetas.replace("__planeta__", nombre)
+    .replace("__orbita__", orbita)
+    .replace("__fecha__", fecha)
+    .replace("__telescopio__",telescopio)
+
+    contendorPlanetas.innerHTML += plantillaFinal;
+  });
+});
 
 var plantillaPlanetas = '<div class="row">'+
   '<div class="col s12 m9 offset-m1">'+
@@ -34,17 +52,14 @@ var plantillaPlanetas = '<div class="row">'+
   '</div>'+
 '</div>';
 
-function mostrarPlaneta (planeta) {
-  var contenedorPlanetas = document.getElementById('contendorPlanetas')
-  var nombre = planeta.pl_name;
-  var orbita = planeta.pl_orbper;
-  var fecha = planeta.pl_disc;
-  var telescopio = planeta.pl_telescope;
 
-  var plantillaFinal = plantillaPlanetas.replace("__planeta__", nombre)
-  .replace("__orbita__", orbita)
-  .replace("__fecha__", fecha)
-  .replace("__telescopio__",telescopio)
-
-  contendorPlanetas.innerHTML= plantillaFinal;
-};
+// ANIDADOS
+// .then(function(resultado){
+//   return(getJSON(resultado.results.forEach(function (url) {
+//     return getJSON(url)
+//       .then(function(resultadoPlaneta) {
+//         mostrarPlaneta(resultadoPlaneta)
+//         console.log(resultadoPlaneta)
+//       })
+//     })))
+// });
